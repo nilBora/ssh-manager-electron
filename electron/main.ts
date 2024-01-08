@@ -1,13 +1,14 @@
 import { app, BrowserWindow } from 'electron';
 import * as path from 'path';
 import installExtension, { REACT_DEVELOPER_TOOLS } from "electron-devtools-installer";
+//import ipcMain = Electron.ipcMain;
 
 function createWindow() {
   const win = new BrowserWindow({
     width: 1024,
     height: 600,
     webPreferences: {
-      // contextIsolation: false,
+      contextIsolation: false,
       preload: path.join(__dirname, 'preload.js')
     }
   })
@@ -53,4 +54,8 @@ app.whenReady().then(() => {
       app.quit();
     }
   });
+
+  // ipcMain.on('open-add-dialog', () => {
+  //   console.log('open-add-dialog');
+  // });
 });
