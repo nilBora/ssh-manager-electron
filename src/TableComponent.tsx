@@ -12,6 +12,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEdit} from "@fortawesome/free-solid-svg-icons";
 import {faRemove} from "@fortawesome/free-solid-svg-icons";
 import {faSave} from "@fortawesome/free-solid-svg-icons";
+//import {contextBridge, ipcRenderer} from "electron";
 
 interface Data {
     id: number;
@@ -46,6 +47,16 @@ const TableComponent: React.FC = () => {
     const [editableRow, setEditableRow] = useState<number | null>(null);
 
     const handleAddRow = () => {
+        //window.electronAPI.setTitle('Your Title');
+        //ipcRenderer.send('open-add-dialog', 'Add');
+        //let title = 'Add';
+    
+
+        //window.electronAPI.setTitle('Your Title');
+        // contextBridge.exposeInMainWorld('electronAPI', {
+        //     setTitle: (title: any) => ipcRenderer.send('open-add-dialog', title)
+        // });
+
         const newRow: Data = {
             id: data.length + 1,
             alias: 'New Alias',
@@ -75,7 +86,6 @@ const TableComponent: React.FC = () => {
     };
 
     return (
-
             <div>
                 <Button variant="contained" onClick={handleAddRow}>Add</Button>
                 <TableContainer component={Paper}>

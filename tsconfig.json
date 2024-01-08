@@ -18,7 +18,16 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "preserve",
+    "paths": {
+      "stream": ["./node_modules/stream-browserify"],
+      "path": ["./node_modules/path-browserify"],
+      "os": ["./node_modules/os-browserify"]
+    },
+    "typeRoots": [
+      "./node_modules/@types",
+      "./src/types"
+    ]
   },
   "include": [
     "src"
