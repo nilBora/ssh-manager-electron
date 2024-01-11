@@ -47,7 +47,8 @@ const TableComponent: React.FC = () => {
     const [editableRow, setEditableRow] = useState<number | null>(null);
 
     const handleAddRow = () => {
-        window.electronAPI.setTitle('Your Title');
+        let res = window.electronAPI.ping();
+        console.log(res);
         //ipcRenderer.send('open-add-dialog', 'Add');
         //let title = 'Add';
     
