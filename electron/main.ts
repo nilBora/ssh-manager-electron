@@ -10,16 +10,15 @@ function createWindow() {
   ipcMain.handle("ping", async (event, arg) => {
     // do stuff
     //await awaitableProcess();
-    let whoami = "";
+
     exec("whoami", (err, stdout, stderr) => {
       if (err) {
         console.log(err);
         return;
       }
-      // console.log(stdout);
-      //whoami = stdout;
+
       let file = "/Users/" + stdout.trim() + "/.zprofile";
-      console.log(file);
+
       fs.open(file, "r", (err, fd) => {
         if (err) {
           if (err.code === "ENOENT") {
