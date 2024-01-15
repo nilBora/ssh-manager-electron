@@ -5,6 +5,7 @@ import installExtension, {
 } from "electron-devtools-installer";
 import * as fs from "fs";
 import { exec } from "child_process";
+import * as readline from "readline";
 
 function createWindow() {
   ipcMain.handle("ping", async (event, arg) => {
@@ -19,15 +20,27 @@ function createWindow() {
 
       let file = "/Users/" + stdout.trim() + "/.zprofile";
 
-      fs.open(file, "r", (err, fd) => {
-        if (err) {
-          if (err.code === "ENOENT") {
-            console.error("myfile does not exist");
-            return;
-          }
-        }
-        console.log("file opened");
+      var lineReader = readline.createInterface({
+        input: require("fs").createReadStream(file),
       });
+
+      lineReader.on("line", function (line) {
+        console.log("Line from file:", line);
+      });
+
+      lineReader.on("close", function () {
+        console.log("all done, son");
+      });
+
+      // fs.open(file, "r", (err, fd) => {
+      //   if (err) {
+      //     if (err.code === "ENOENT") {
+      //       console.error("myfile does not exist");
+      //       return;
+      //     }
+      //   }
+      //   console.log("file opened");
+      // });
     });
 
     return "pong!";
